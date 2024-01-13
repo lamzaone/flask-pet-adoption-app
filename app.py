@@ -61,36 +61,18 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 def load_user(user_id):
     return User.get(user_id)
 
-
+# redirect to homepage
 @app.route("/")
 def redirect_to_home():
     return redirect("/home")
 
+# homepage
 @app.route("/home")
 def index():
     return render_template("index.html")
 
-@app.route("/adoptions")
-def adoptions():
-    # get the requested page from the query parameters, default to 1 for first page
-    page = int(request.args.get("page", default=1))
 
-    # set the number of items per page
-    per_page = 5
-
-    # get animals for the requested page
-    animal_posts = Animal.get_all(page, per_page)
-    hasForms = False
-
-    if current_user.is_authenticated:
-        # first we check if the current user has any forms completed for their posted animals,
-        # in order to decide whether to draw the Show Forms button or not.
-        if len(AdoptionForm.get_all_by_owner(current_user.id)) > 0:
-            hasForms = True
-
-    return render_template("adoptions.html", hasForms=hasForms, animal_posts=animal_posts, page=page, per_page=per_page, Animal=Animal)
-
-
+# Google OAuth2.0
 @app.route("/login")
 def login():
     # Find out what URL to hit for Google login
@@ -169,6 +151,35 @@ def callback():
     return redirect(url_for("index"))
 
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
+
+
+
+# adoptions page
+@app.route("/adoptions")
+def adoptions():
+    # get the page number from url
+    page = int(request.args.get("page", default=1))
+
+    # set the number of items per page
+    per_page = 5
+
+    # get animals for the requested page
+    animal_posts = Animal.get_all(page, per_page)
+    hasForms = False
+
+    if current_user.is_authenticated:
+        # first we check if the current user has any forms completed for their posted animals,
+        # in order to decide whether to draw the Show Forms button or not.
+        if len(AdoptionForm.get_all_by_owner(current_user.id)) > 0:
+            hasForms = True
+
+    return render_template("adoptions.html", hasForms=hasForms, animal_posts=animal_posts, page=page, per_page=per_page, Animal=Animal)
+
 @app.route("/adoptions/viewpost", methods=["GET"])
 def viewpost():
     # Get animal and post owner info from url
@@ -177,6 +188,8 @@ def viewpost():
     user = User.get(animal.user_id)
     return render_template("viewpost.html", user=user, _id=_id, animal=animal)
 
+
+# view completed forms for people who added animals for adoption
 @app.route("/forms/viewforms")
 @login_required
 def viewforms():
@@ -189,10 +202,12 @@ def viewforms():
     else:
         return render_template("error_message.html", message="You have nothing to see...")
 
+
+# see your adoption forms status
 @app.route("/forms/status")
 @login_required
 def myforms():
-    # get all the adoption forms completed for the current user's posts
+    # get all the adoption forms completed by current user
     adoption_forms = AdoptionForm.get_all_by_user(current_user.id)
 
     # if we have forms, then we show them
@@ -201,7 +216,7 @@ def myforms():
     else:
         return render_template("error_message.html", message="Hello! You can fill an adoption formular at any time, and you can check the status here!")
 
-# route to handle form deletion by post owner
+# route to deny an adoption form, by post owner
 @app.route("/forms/deny/<string:user_id>/<int:animal_id>", methods=["POST"])
 @login_required
 def deny_form(user_id, animal_id):
@@ -217,13 +232,8 @@ def accept_form(user_id, animal_id):
     return redirect(url_for('viewforms'))
 
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("index"))
 
-
+# route for adopting an animal, handling both GET and POST requests
 @app.route("/adoptions/adopt/<int:animal_id>", methods=["GET", "POST"])
 @login_required
 def animal_adopt_form(animal_id):
@@ -233,7 +243,7 @@ def animal_adopt_form(animal_id):
     # Check if the animal exists
     if not animal:
         # Handle the case where the animal does not exist
-        return render_template("error.html", message="Animal not found")
+        return render_template("error_message.html", message="Animal not found")
 
     if request.method == "POST":
         # Get form data
@@ -265,6 +275,7 @@ def animal_adopt_form(animal_id):
     # Pass the animal data to the template
     return render_template("adoption_form.html", animal=animal)
 
+# create a post for animal adoption
 @app.route("/adoptions/upload", methods=["GET","POST"])
 @login_required
 def animal_upload_form():
@@ -298,11 +309,12 @@ def animal_upload_form():
 
     return render_template("add_adoption_post.html")
 
-
+# route for completely removing an animal(adoption post) from the database
 @app.route("/adoptions/remove/<int:animal_id>", methods=["POST"])
 @login_required
 def remove_animal(animal_id):
-    # make sure the current user owns the animal before removing it
+    # make sure the current user owns the animal before removing it,
+    # or check if current user is admin
     animal = Animal.get(animal_id)
     if animal and animal.user_id == current_user.id or current_user.is_admin:
         Animal.remove(animal_id)

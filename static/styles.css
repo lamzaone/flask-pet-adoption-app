@@ -1,0 +1,532 @@
+/* static/styles.css */
+body {
+    font-family: Verdana ;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+/* navbar */
+.navbar{
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+
+
+    & .navbar-item{
+        padding: 5px 100px;
+        background-color: rgba(234, 158, 87, 0.59);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.3s all ease-in-out;
+
+        &:hover {
+            transition: 0.3s all ease-in-out;
+
+            background-color: rgba(245, 177, 128, 0.59);
+            padding: 5px 110px;
+        }
+        & a{
+            text-decoration: none;
+            color: white;
+        }
+
+
+    }
+}
+
+/* login/logout */
+.login-container {
+    font-size: 10px;
+    position: fixed;
+    bottom: 10px;
+    right:10px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: rgba(255, 255, 255, 0.51);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+}
+
+.login-container img {
+    width: 50px;
+    border-radius: 100px;
+}
+
+.welcome-message {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.profile-picture {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+
+}
+
+.logout-button {
+    justify-content: center;
+    display: flex;
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.login-button {
+    display: flex;
+    background-color: #4285f4;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.login-button:hover, .logout-button:hover {
+    opacity: 0.8;
+}
+
+
+/* unauthorized access */
+
+.unauthorized{
+    text-align: center;
+}
+
+
+/* index.html */
+.homepage{
+    z-index: -1;
+    & header{
+        display: flex;
+        flex-direction: column;
+        width: 810px;
+        margin: 20px auto 0 auto;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: rgba(234, 158, 87, 0.59);
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+    & main{
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 3px solid rgba(234, 158, 87, 0.59);
+        background-color: rgba(190, 189, 189, 0.15);
+        backdrop-filter: blur(6px);
+        padding: 20px;
+        width: 805px;
+        margin: 20px auto;
+        text-align: center;
+    }
+    & section{
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    & h2{
+        text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+        color: rgba(234, 158, 87, 0.59);
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    & li{
+        list-style-type: none;
+        text-align: center;
+    }
+}
+
+/* adoptions.html */
+.adoption-container{
+    margin-top:  80px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    & .adoption-list{
+        height: 500px;
+    }
+    & h2{
+        margin-bottom: 50px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    & ul{
+        justify-content: center;
+        text-decoration: none;
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        -webkit-overflow-scrolling: touch;
+        & li{
+            width: 200px;
+            height: 350px;
+            padding: 10px;
+            border-radius: 20px;
+            text-decoration: none;
+            background-color: rgba(234, 158, 87, 0.59);
+            backdrop-filter: blur(20px);
+            transition: 0.3s all  ease-in-out;  
+
+            & .information{
+                height: 200px;
+            }
+
+            & img {
+                object-fit: revert;
+                align-self: center;
+                justify-self: center;
+                width: 200px;
+                height: 150px;
+                border-radius: 10px;
+                transition: 0.3s all  ease-in-out;
+            }
+            &:hover{
+                background-color: rgba(234, 158, 87, 0.59);
+                backdrop-filter: blur(20px);
+                height: 380px;
+                width: 220px;
+
+   
+                & img{
+                    width: 220px;
+                    height: 170px;
+                    transition: 0.3s all ease-in-out;
+
+                }
+                transition: 0.3s ease-in-out;
+            }
+            & h3 {
+                margin-top: -40px;
+                margin-left: 10px;
+                font-size: 25px;
+                color: white;
+            }
+
+            & p {
+                margin: 0 10px;
+            }
+            & form{
+                display: flex;
+            }
+
+
+        }
+    }
+
+
+}
+
+.remove-button{
+    position: relative;
+    margin-left:auto;
+    margin-right: auto;
+    width: 90%;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #ab2222;
+    color: white;
+    transition: 0.3s all ease-in-out;
+
+    &:hover{
+        background-color: #d70101;
+    }
+}
+
+.pagination{
+    width:100%;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+
+
+
+    .button{
+        text-decoration: none;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+
+
+    }
+    .button-inactive{
+        width: 50px;
+        display: flex;
+    }
+    & a{
+        text-decoration: none;
+    }
+}
+
+/* viewpost.html */
+.prezentare{
+    border-radius: 20px ;
+    margin-top: 100px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 600px;
+    background-color: rgba(234, 158, 87, 0.59);
+    backdrop-filter: blur(10px);
+
+    & form{
+        display: flex;
+
+        & button{
+            justify-self: center;
+            margin-bottom:10px;
+        }
+    }
+    & .info{
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+
+        & img{
+            align-self: center;
+            border-radius: 10px;
+
+        }
+
+        & .name{
+            position: relative;
+            color: white;
+            font-weight: 1000;
+            left: 50px;
+            top: -80px;
+            font-size: 32px;
+        }
+
+        & div{
+            position: relative;
+            top: -100px;
+            display: flex;
+            flex-direction: column;
+            margin: 0 40px;
+            & .alt-text{
+                font-weight: 1000;
+            }
+        }
+    }
+
+
+    & .posted-by{
+        align-self: center;
+        width: 90%;
+        background-color: rgba(255, 255, 255, 0.46);
+        padding:7px;
+        border-radius: 20px;
+        position: relative;
+        margin-top: auto;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+
+        & img{
+            width:70px;
+            height:70px;
+            border-radius: 100px;
+        }
+        & div{
+            display: flex;
+            flex-direction: column;
+            gap:0;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+
+            & p{
+                margin:0 0 0 10px;
+            }
+        }
+    }
+}
+
+.adopt{
+    justify-self: center;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 40px;
+    display: flex;
+    padding: 10px 20px;
+    width: 150px;
+    background-color: rgba(234, 158, 87, 0.38);
+    backdrop-filter: blur(2px);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+/* add_adoption_post.html */
+.upload-container{
+    width: 300px;
+    justify-self: center;
+    align-self: center;
+    margin-top: 150px;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    background-color: rgba(234, 158, 87, 0.59);
+    backdrop-filter: blur(10px);
+    padding: 50px 80px;
+    gap: 20px;
+
+    & input,& textarea,& label,& button,& select{
+        display: flex;
+        width: 260px;
+        margin: 5px auto;
+    }
+    & label{
+        font-weight: 1000;
+    }
+    & button{
+        justify-content: center;
+    }
+    & h2{
+        justify-self: center;
+        align-self: center;
+    }
+    & a{
+        justify-self: center;
+        align-self: center;
+    }
+
+    & button{
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        justify-self: center;
+        align-self: center;
+
+    }
+}
+
+.upload-line{
+    align-content: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.upload-button {
+    justify-self: center;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 40px;
+    display: flex;
+    padding: 10px 20px;
+    width: 150px;
+    background-color: rgba(234, 158, 87, 0.59);
+    backdrop-filter: blur(10px);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+
+    & a{
+        color: black;
+        text-decoration: none;
+    }
+}
+.upload-button #nr2{
+    margin-top: 1px;
+}
+
+.upload-button:hover {
+    background-color: rgba(255, 190, 132, 0.59);
+    backdrop-filter: blur(20px);
+    transition: 0.3s all ease-in-out;
+}
+
+
+.forms-list {
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+
+    & .form-line{
+        display: flex;
+        flex-direction: row;
+    }
+
+    & h2{
+        font-size: 36px;
+        margin: 50px 0 100px 0;
+    }
+
+    & a{
+        position: relative;
+        margin-left: 5px;
+        top: 15px;
+    }
+
+    & ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Three columns with equal width */
+        gap: 20px; /* Adjust the gap between items */
+        list-style-type: none;
+    }
+
+    & li {
+        padding: 30px;
+        border-radius: 20px;
+        background-color: rgba(234, 158, 87, 0.59);
+        backdrop-filter: blur(10px);
+        margin: 15px;
+
+        & form {
+            display: flex;
+            gap: 10px;
+
+            & .remove-button {
+                margin-top: 5px;
+                width: 100%;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            & #complete-button {
+                background-color: green;
+                transition: 0.3s all ease-in-out;
+
+                &:hover{
+                    background-color: #02be02;
+                }
+            }
+        }
+    }
+}
+

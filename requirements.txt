@@ -1,0 +1,8 @@
+requests~=2.31.0
+Flask~=3.0.0
+oauthlib~=3.2.2
+pyOpenSSL
+Flask-Login
+jinja2
+itsdangerous
+click~=8.1.7

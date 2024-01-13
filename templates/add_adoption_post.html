@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Upload Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-item">
+            <a href="{{ url_for('index') }}">Home</a>
+        </div>
+        <div class="navbar-item">
+            <a href="{{ url_for('adoptions', page=1) }}">Adopt</a>
+        </div>
+        <div class="navbar-item">
+            <a href="{{ url_for('myforms') }}">View status</a>
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <div class="login-container">
+            <div class="profile-picture">
+                <img src="{{ current_user.profile_pic }}" width="75px" alt="Google profile pic"><p class="welcome-message">Hello, {{ current_user.name }}!</p>
+            </div>
+            <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        {% else %}
+        <div class="login-container">
+            <h2>Logged out</h2>
+            <a class="login-button" href="/login">Login with Google</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+    <div class="upload-container">
+        <h2>Animal Upload Form</h2>
+        <form method="post" action="{{ url_for('animal_upload_form') }}">
+
+            <div class="upload-line">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="upload-line">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+
+            <div class="upload-line">
+                <label for="kind">Kind:</label>
+                <input type="text" id="kind" name="kind" required>
+            </div>
+
+            <div class="upload-line">
+                <label for="breed">Breed:</label>
+                <input type="text" id="breed" name="breed">
+            </div>
+
+            <div class="upload-line">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="upload-line">
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age" required>
+            </div>
+
+
+            <div class="upload-line">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+
+
+            <div class="upload-line">
+                <label for="img_url">Image URL:</label>
+                <input type="text" id="img_url" name="img_url" required>
+            </div>
+
+
+            <button class="upload-button" type="submit">Add Animal</button>
+        </form>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

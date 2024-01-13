@@ -1,0 +1,72 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login Example</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-item">
+            <a href="{{ url_for('index') }}">Home</a>
+        </div>
+        <div class="navbar-item">
+            <a href="{{ url_for('adoptions', page=1) }}">Adopt</a>
+        </div>
+        <div class="navbar-item">
+            <a href="{{ url_for('myforms') }}">View status</a>
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <div class="login-container">
+            <div class="profile-picture">
+                <img src="{{ current_user.profile_pic }}" width="75px" alt="Google profile pic"><p class="welcome-message">Hello, {{ current_user.name }}!</p>
+            </div>
+            <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        {% else %}
+        <div class="login-container">
+            <h2>Logged out</h2>
+            <a class="login-button" href="/login">Login with Google</a>
+        </div>
+        {% endif %}
+
+    </div>
+    <div class="homepage">
+        <header>
+            <h1>Welcome to Our Animal Shelter</h1>
+            <p>Helping Animals Find Loving Homes</p>
+        </header>
+
+        <main>
+            <section>
+                <h2>Our Mission</h2>
+                <p>We are dedicated to providing a safe haven for animals in need and connecting them with caring adopters.</p>
+            </section>
+
+            <section>
+                <h2>Services</h2>
+                <p>Our shelter offers a variety of services, including:</p>
+                <p>Adoption Services</p>
+                <p>Animal Rescue</p>
+                <p>Community Outreach Programs</p>
+
+            </section>
+
+            <section>
+                <h2>How You Can Help</h2>
+                <p>Join us in making a difference:</p>
+                <p>Adopt a Pet</p>
+                <p>Volunteer Your Time</p>
+                <p>Donate to Support Our Mission</p>
+
+            </section>
+        </main>
+
+
+    </div>
+</body>
+
+</html>

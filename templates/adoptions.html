@@ -1,0 +1,109 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login Example</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-item">
+            <a href="{{ url_for('index') }}">Home</a>
+        </div>
+        <div class="navbar-item">
+            <a href="{{ url_for('adoptions', page=1) }}">Adopt</a>
+        </div>
+        <div class="navbar-item">
+            <a href="{{ url_for('myforms') }}">View status</a>
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <div class="login-container">
+            <div class="profile-picture">
+                <img src="{{ current_user.profile_pic }}" width="75px" alt="Google profile pic"><p class="welcome-message">Hello, {{ current_user.name }}!</p>
+            </div>
+            <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        {% else %}
+        <div class="login-container">
+            <h2>Logged out</h2>
+            <a class="login-button" href="/login">Login with Google</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <div class="adoption-container">
+        <h2>Souls up for adoption</h2>
+        <div class="adoption-list">
+        {% if animal_posts %}
+            <ul>
+                {% for post in animal_posts %}
+
+                    <li onclick="location.href='{{ url_for('viewpost', id=post.id) }}'"><img src="{{ post.img_url }}">
+                        <div class="information">
+                            <h3>{{ post.name }}</h3>
+                            <p>Breed: {{ post.breed }}</p>
+                            <p>Age: {{ post.age }}</p>
+                            <p> {{ post.description if post['description']|length < 50 else post.description[:50]+"..." }}</p>
+                        </div>
+                        {% if current_user.id == post['user_id'] or current_user.is_admin %}
+                        <form method="post" action="{{ url_for('remove_animal', animal_id=post.id) }}">
+                            <button type="submit" class="remove-button">REMOVE POST</button>
+                        </form>
+                        {% endif %}
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+
+       <div class="pagination">
+
+            {% if page > 1 %}
+                <div class="button">
+                    <a href="{{ url_for('adoptions', page=page-1) }}">«</a>
+                </div>
+            {% else %}
+                <div class="button-inactive">
+                </div>
+            {% endif %}
+           <span>Page {{ page }}</span>
+            {% if Animal.get_all(page+1,per_page)|length > 0%}
+                <div class="button">
+                    <a href="{{ url_for('adoptions', page=page+1) }}">»</a>
+                </div>
+            {% else %}
+                <div class="button-inactive">
+                </div>
+            {% endif %}
+        </div>
+        {% else %}
+            <p>No animals available for adoption at the moment. Check back later!</p>
+        {% endif %}
+    </div>
+
+
+
+    {% if current_user.is_authenticated %}
+    <div class="upload-button"><a href="{{ url_for('animal_upload_form') }}">+ ADD ANIMAL</a></div>
+        {% if hasForms %}
+        <div class="upload-button" id="nr2"><a href="{{ url_for('viewforms') }}">VIEW FORMS</a></div>
+        {% endif %}
+    <div class="login-container">
+        <div class="profile-picture">
+            <img src="{{ current_user.profile_pic }}" width="75px" alt="Google profile pic"><p class="welcome-message">Hello, {{ current_user.name }}!</p>
+        </div>
+        <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    {% else %}
+    <div class="login-container">
+        <h2>Logged out</h2>
+        <a class="login-button" href="/login">Login with Google</a>
+    </div>
+    {% endif %}
+
+</body>
+</html>

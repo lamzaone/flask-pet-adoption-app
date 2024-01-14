@@ -1,4 +1,4 @@
-create table main.user
+create table user
 (
     id          TEXT
         primary key,
@@ -8,17 +8,13 @@ create table main.user
     profile_pic TEXT                  not null,
     is_admin    boolean default false null on conflict replace
 );
-
-
-
-
-create table main.animals
+create table animals
 (
     id          INTEGER not null
         primary key autoincrement ,
     name        TEXT    not null,
     user_id     TEXT
-        references main.user,
+        references user,
     kind        TEXT    not null,
     breed       TEXT,
     sex         TEXT,
@@ -28,16 +24,14 @@ create table main.animals
     location    TEXT,
     adopted     boolean default 0
 );
-
-
 create table main.adoption_forms
 (
     user_id             TEXT
-        references main.user,
+        references user,
     animal_id           TEXT
-        references main.animals,
+        references animals,
     owner_id            TEXT
-        references main.user,
+        references user,
     user_age            TEXT,
     location            TEXT,
     building_type       TEXT,

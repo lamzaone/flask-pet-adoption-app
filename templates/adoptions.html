@@ -18,21 +18,6 @@
         <div class="navbar-item">
             <a href="{{ url_for('myforms') }}">View status</a>
         </div>
-
-        {% if current_user.is_authenticated %}
-        <div class="login-container">
-            <div class="profile-picture">
-                <img src="{{ current_user.profile_pic }}" width="75px" alt="Google profile pic"><p class="welcome-message">Hello, {{ current_user.name }}!</p>
-            </div>
-            <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
-        </div>
-        {% else %}
-        <div class="login-container">
-            <h2>Logged out</h2>
-            <a class="login-button" href="/login">Login with Google</a>
-        </div>
-        {% endif %}
-
     </div>
 
     <div class="adoption-container">
@@ -85,6 +70,25 @@
         {% endif %}
     </div>
 
+
+
+    {% if current_user.is_authenticated %}
+    <div class="upload-button"><a href="{{ url_for('animal_upload_form') }}">+ ADD ANIMAL</a></div>
+        {% if hasForms %}
+        <div class="upload-button" id="nr2"><a href="{{ url_for('viewforms') }}">VIEW FORMS</a></div>
+        {% endif %}
+    <div class="login-container">
+        <div class="profile-picture">
+            <img src="{{ current_user.profile_pic }}" width="75px" alt="Google profile pic"><p class="welcome-message">Hello, {{ current_user.name }}!</p>
+        </div>
+        <a class="logout-button" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    {% else %}
+    <div class="login-container">
+        <h2>Logged out</h2>
+        <a class="login-button" href="/login">Login with Google</a>
+    </div>
+    {% endif %}
 
 </body>
 </html>

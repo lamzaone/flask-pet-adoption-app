@@ -190,7 +190,7 @@ def viewpost():
 
 
 # view completed forms for people who added animals for adoption
-@app.route("/forms/viewforms")
+@app.route("/forms/view")
 @login_required
 def viewforms():
     # get all the adoption forms completed for the current user's posts
@@ -258,17 +258,20 @@ def animal_adopt_form(animal_id):
         phone_number = request.form.get("phone_number")
 
         # Add the new animal to the database
-        AdoptionForm.create(
-            user_id = user_id,
-            animal_id =animal_id,
-            owner_id = owner_id,
-            user_age = user_age,
-            location = location,
-            building_type = building_type,
-            current_pets = current_pets,
-            previous_experience = previous_experience,
-            phone_number = phone_number
-        )
+        try:
+            AdoptionForm.create(
+                user_id = user_id,
+                animal_id =animal_id,
+                owner_id = owner_id,
+                user_age = user_age,
+                location = location,
+                building_type = building_type,
+                current_pets = current_pets,
+                previous_experience = previous_experience,
+                phone_number = phone_number
+            )
+        except sqlite3.IntegrityError:
+            return render_template("error_message.html", message="You can not complete two forms for the same animal!")
 
         # redirect back to homepage after creating adoption post
         return redirect(url_for('index'))
@@ -326,4 +329,4 @@ def get_google_provider_cfg():
 
 
 if __name__ == "__main__":
-    app.run(ssl_context="adhoc", host='127.0.0.1', port='5000')
+    app.run(ssl_context=('cert.pem', 'key.pem'), host='127.0.0.1', port='5000')

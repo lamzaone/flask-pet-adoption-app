@@ -1,4 +1,4 @@
-# google-client-app
+# flask app for pet adoptions with google oauth2.0 login
 Flask, Flask-Login, Login with Google, App setup as Google Client
 
 1.1 Installation with Pipenv:

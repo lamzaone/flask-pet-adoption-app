@@ -7,7 +7,7 @@ Flask, Flask-Login, Login with Google, App setup as Google Client
 pipenv install
 ```
 
-# Installation without Pipenv:
+- Installation without Pipenv:
 
 ```
 pip install -r requirements.txt
@@ -17,7 +17,7 @@ pip install -r requirements.txt
 ```bash
 openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
 ```
-# Or, instead you could replace the last line of app.py with
+- Or, instead you could replace the last line of app.py with
 ```python3
     app.run(ssl_context="adhoc", host='127.0.0.1', port='5000')
 ```

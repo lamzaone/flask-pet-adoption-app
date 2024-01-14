@@ -13,6 +13,14 @@ Installation without Pipenv:
 pip install -r requirements.txt
 ```
 
+Generate a SSL certificate
+```bash
+openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+```
+
+Generate Google OAuth2.0 credentials and store them into your system environments variables
+
+
 Initalize the database by running app.py for the first time:
 
 ```

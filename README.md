@@ -1,27 +1,27 @@
 # google-client-app
 Flask, Flask-Login, Login with Google, App setup as Google Client
 
-Installation with Pipenv:
+1.1 Installation with Pipenv:
 
 ```
 pipenv install
 ```
 
-Installation without Pipenv:
+1.2 Installation without Pipenv:
 
 ```
 pip install -r requirements.txt
 ```
 
-Generate a SSL certificate
+2. Generate a SSL certificate (on windows you can use GitBash)
 ```bash
 openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
 ```
 
-Generate Google OAuth2.0 credentials and store them into your system environments variables
+3. Generate Google OAuth2.0 API credentials on Google Console and store them into your system environments variables
 
 
-Initalize the database by running app.py for the first time:
+4. Initalize the database by running app.py for the first time:
 
 ```
 python app.py
@@ -29,8 +29,11 @@ python app.py
 
 Should see "Initialized the database."
 
-Run the command again to start the Flask web server locally:
+5. Run the command again to start the Flask web server locally:
 
 ```
 python app.py
 ```
+
+
+if the command above gives errors, try using python3 instead of python.

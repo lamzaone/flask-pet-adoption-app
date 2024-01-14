@@ -34,3 +34,6 @@ Should see "Initialized the database."
 ```
 python app.py
 ```
+
+
+if the command above gives errors, try using python3 instead of python.

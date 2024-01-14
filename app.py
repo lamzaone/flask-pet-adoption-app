@@ -182,8 +182,9 @@ def adoptions():
 
 @app.route("/adoptions/viewpost", methods=["GET"])
 def viewpost():
-    # Get animal and post owner info from url
+    # get the id of the animal we're viewing from the url
     _id = int(request.args.get("id"))
+    # Get animal and post owner info from current animal id
     animal = Animal.get(_id)
     user = User.get(animal.user_id)
     return render_template("viewpost.html", user=user, _id=_id, animal=animal)

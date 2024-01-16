@@ -160,10 +160,10 @@ def logout():
 
 
 # adoptions page
-@app.route("/adoptions")
-def adoptions():
-    # get the page number from url
-    page = int(request.args.get("page", default=1))
+@app.route("/adoptions/page=<int:page>")
+def adoptions(page):
+    # # get the page number from url
+    # page = int(request.args.get("page", default=1))
 
     # set the number of items per page
     per_page = 5
@@ -180,7 +180,7 @@ def adoptions():
 
     return render_template("adoptions.html", hasForms=hasForms, animal_posts=animal_posts, page=page, per_page=per_page, Animal=Animal)
 
-@app.route("/adoptions/viewpost", methods=["GET"])
+@app.route("/adoptions/view", methods=["GET"])
 def viewpost():
     # get the id of the animal we're viewing from the url
     _id = int(request.args.get("id"))
@@ -297,15 +297,15 @@ def animal_upload_form():
 
         # Add the new animal to the database
         Animal.create(
-            name=name,
-            user_id=current_user.id,
-            kind=kind,
-            breed=breed,
-            sex=sex,
-            age=age,
-            description=description,
-            img_url=img_url,
-            location=location
+            name = name,
+            user_id = current_user.id,
+            kind = kind,
+            breed = breed,
+            sex = sex,
+            age = age,
+            description = description,
+            img_url = img_url,
+            location = location
         )
 
         # redirect back to homepage after creating adoption post
@@ -328,6 +328,7 @@ def remove_animal(animal_id):
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
 
+# TODO - add emailing
 
 if __name__ == "__main__":
     app.run(ssl_context=('cert.pem', 'key.pem'), host='127.0.0.1', port='5000')

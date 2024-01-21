@@ -51,6 +51,7 @@ class Animal:
         db = get_db()
         db.execute("UPDATE animals SET adopted = 'true' WHERE id=?", (animal_id,))
         db.commit()
+        
     @staticmethod
     def get_all(page, per_page):
         db = get_db()

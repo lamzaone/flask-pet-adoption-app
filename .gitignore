@@ -1,3 +1,4 @@
 /key.pem
 /cert.pem
 /sqlite_db
+/__pycache__
